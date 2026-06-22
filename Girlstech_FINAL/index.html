@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+    <div class="hero-text">
+        <p class="tag">Apprendre · Jouer · Découvrir</p>
+        <h1>Découvre le numérique avec GIRLSTECH</h1>
+        <p>Une application éducative pour apprendre Python, découvrir les métiers du numérique et s'inspirer des femmes pionnières de l'informatique.</p>
+        {% if user %}
+            <a class="btn" href="{{ url_for('dashboard') }}">Continuer mon parcours</a>
+        {% else %}
+            <a class="btn" href="{{ url_for('register') }}">Commencer l'aventure</a>
+        {% endif %}
+    </div>
+    <div class="hero-mascots">
+        <div class="ada-illustration">👩🏻‍💻</div>
+        <div class="speech-bubble">Salut, moi c'est Ada ! Je vais t'aider à comprendre chaque niveau.</div>
+        <div class="cute-codee">
+            <div class="codee-screen"><span>●</span><span>●</span><b>⌣</b></div>
+            <div class="codee-body">CODE-E</div>
+        </div>
+    </div>
+</section>
+
+<section class="cards">
+    <div class="card"><h3>Mini-cours avec Ada</h3><p>Une bulle ludique explique la notion avant chaque niveau.</p></div>
+    <div class="card"><h3>CODE-E chatbot</h3><p>Un robot mignon répond aux questions et encourage l'utilisatrice.</p></div>
+    <div class="card"><h3>Devine la pionnière</h3><p>Un jeu pour découvrir les femmes qui ont marqué l'informatique.</p></div>
+</section>
+
+{% if not user %}
+<section class="login-box">
+    <h2>Déjà un compte ?</h2>
+    <form method="POST" action="{{ url_for('login') }}">
+        <input type="text" name="username" placeholder="Pseudo">
+        <button type="submit">Se connecter</button>
+    </form>
+</section>
+{% endif %}
+{% endblock %}
