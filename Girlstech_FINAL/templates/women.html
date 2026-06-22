@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-title">
+    <p class="tag">Mini-jeu culturel</p>
+    <h1>Devine la pionnière</h1>
+    <p>Observe l'image, lis l'indice et retrouve le nom de la femme qui a marqué l'histoire de la tech.</p>
+</section>
+
+<section class="women-grid">
+    {% for w in women %}
+    <form method="POST" class="woman-game-card">
+        <input type="hidden" name="woman_id" value="{{ w.id }}">
+        <img src="{{ url_for('static', filename='img/women/' + w.image) }}" alt="{{ w.name }}">
+        <div class="woman-content">
+            <p>{{ w.description }}</p>
+            <h3>Qui suis-je ?</h3>
+            {% for choice in w.choices %}
+            <label class="choice"><input type="radio" name="answer" value="{{ choice }}" required> {{ choice }}</label>
+            {% endfor %}
+            <button type="submit">Valider</button>
+        </div>
+    </form>
+    {% endfor %}
+</section>
+
+{% if result %}
+<div class="modal-result">
+    <div class="modal-card {% if result.success %}success{% else %}error{% endif %}">
+        {% if result.success %}
+        <h2>🎉 Bravo ! +50 XP</h2>
+        <p>Tu as reconnu {{ result.correct }}.</p>
+        {% else %}
+        <h2>🤖 CODE-E : presque !</h2>
+        <p>La bonne réponse était {{ result.correct }}.</p>
+        {% endif %}
+        <p>{{ result.role }}</p>
+        <a class="btn" href="{{ url_for('women') }}">Continuer</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

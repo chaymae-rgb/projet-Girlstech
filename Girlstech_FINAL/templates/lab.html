@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="lab-page">
+    <div>
+        <p class="tag">Labo Python</p>
+        <h1>Teste du code</h1>
+        <p>Mode sécurisé avec des exemples prêts pour la démonstration.</p>
+        <div class="examples">
+            <button onclick="setCode(`print('Hello')`)">Afficher Hello</button>
+            <button onclick="setCode(`prenom = 'Ada'\nprint(prenom)`)">Variable</button>
+            <button onclick="setCode(`for i in range(3):\n    print(i)`)">Boucle</button>
+        </div>
+    </div>
+    <form method="POST" class="code-box">
+        <textarea id="code" name="code">{{ code }}</textarea>
+        <button type="submit">Exécuter</button>
+    </form>
+    <div class="output-box"><h3>Résultat</h3><pre>{{ output }}</pre></div>
+</section>
+{% endblock %}

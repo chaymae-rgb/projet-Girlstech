@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="profile-page">
+    <div class="profile-card">
+        <div class="big-avatar">{{ {"emma":"👩🏽‍💻","lina":"👩🏼‍🔬","maya":"👩🏾‍🚀","jade":"👩🏻‍🎨","ines":"👩🏿‍🎓","zoe":"👩🏼‍🚀"}.get(user.avatar, "👩🏽‍💻") }}</div>
+        <h1>{{ user.username }}</h1>
+        <p>{{ user.points }} XP</p>
+        <p>{{ completed }} niveau(x) validé(s) sur {{ total }}</p>
+        <p>{{ women_done }} pionnière(s) reconnue(s) sur 5</p>
+    </div>
+    <div class="badges-card">
+        <h2>Mes badges</h2>
+        {% if badges %}
+        <div class="badges">{% for badge in badges %}<span>{{ badge }}</span>{% endfor %}</div>
+        {% else %}
+        <p>Valide un niveau pour débloquer ton premier badge.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

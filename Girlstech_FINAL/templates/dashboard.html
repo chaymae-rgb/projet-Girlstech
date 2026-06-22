@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="dashboard-header">
+    <div>
+        <p class="tag">Bienvenue {{ user.username }}</p>
+        <h1>Ton parcours d'apprentissage</h1>
+        <p>10 niveaux progressifs pour découvrir Python.</p>
+    </div>
+    <div class="score-card"><span>XP</span><strong>{{ user.points }}</strong></div>
+</section>
+<section class="level-map">
+    {% for level in levels %}
+    <a class="level-card {% if level.id < user.current_level %}done{% elif level.id == user.current_level %}active{% endif %}" href="{{ url_for('level', level_id=level.id) }}">
+        <span>Niveau {{ level.id }}</span>
+        <h3>{{ level.title }}</h3>
+        <p>{% if level.id < user.current_level %}Validé{% elif level.id == user.current_level %}En cours{% else %}Disponible{% endif %}</p>
+    </a>
+    {% endfor %}
+</section>
+{% endblock %}

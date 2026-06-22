@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="form-page">
+    <h1>Créer ton compte</h1>
+    <p>Choisis un pseudo et un personnage GIRLSTECH.</p>
+    <form method="POST" class="form-card">
+        <label>Pseudo</label>
+        <input type="text" name="username" placeholder="Ex : Ada2026">
+        <label>Choisis ton avatar</label>
+        <div class="avatar-grid">
+            {% for avatar in avatars %}
+            <label class="avatar-option">
+                <input type="radio" name="avatar" value="{{ avatar.id }}" {% if loop.first %}checked{% endif %}>
+                <div class="avatar-card">
+                    <div class="avatar-person">{{ avatar.emoji }}</div>
+                    <strong>{{ avatar.name }}</strong>
+                    <span>{{ avatar.field }}</span>
+                </div>
+            </label>
+            {% endfor %}
+        </div>
+        <button type="submit">Entrer dans GIRLSTECH</button>
+    </form>
+</section>
+{% endblock %}

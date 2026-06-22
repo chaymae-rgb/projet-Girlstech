@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="level-page">
+    <div class="lesson">
+        <p class="tag">Niveau {{ level.id }}</p>
+        <h1>{{ level.title }}</h1>
+
+        <div class="ada-guide" data-steps='{{ level.lesson_steps | tojson }}'>
+            <div class="ada-character">👩🏻‍💻</div>
+            <div class="ada-dialogue">
+                <h3>Ada t'explique</h3>
+                <p id="adaText"></p>
+                <button type="button" id="adaNext" onclick="nextAdaStep()">Suivant ▶</button>
+            </div>
+        </div>
+
+        <div class="history-box">
+            <h2>{{ level.woman }}</h2>
+            <p>{{ level.story }}</p>
+        </div>
+    </div>
+
+    <div class="quiz-card" id="quizCard">
+        <h2>Quiz</h2>
+        <p>{{ level.question }}</p>
+        <form method="POST">
+            {% for choice in level.choices %}
+            <label class="choice"><input type="radio" name="answer" value="{{ choice }}" required> {{ choice }}</label>
+            {% endfor %}
+            <button type="submit">Valider</button>
+        </form>
+        {% if result %}
+        <div class="result {% if result.success %}success{% else %}error{% endif %}">
+            {% if result.success %}<h3>Bravo ! +30 XP</h3>{% else %}<h3>Pas tout à fait !</h3><p>Bonne réponse : {{ result.correct }}</p>{% endif %}
+            <p>{{ result.explanation }}</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
